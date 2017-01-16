@@ -1,20 +1,16 @@
 from django.shortcuts import render
-from django.template import Template,Context
 import datetime
 # Create your iviews here.
 from django.http import HttpResponse
+from django.http import HttpRequest
 import codecs
-def welcome(request,name):
-	fp=open("/home/demo/myproject/polls/hello.html")
-	fp.seek(0)
-	t=Template(''.join(fp.read().splitlines()))
-	fp.close()
-	c=Context({'name':name})
-	return HttpResponse(t.render(c))
+def welcome(request):
+	c={'name':'User'}
+	return render(request,'dashboard.html',c)
 def index(request):
 	return HttpResponse("Hello,World u are at the poll index page number ")
 def home(request):
-	return HttpResponse("This is the home page and is under development")
+	return render(request,'home.html',{})
 def timeafter(request,offset):
 	now=datetime.datetime.now()
 	try:
@@ -24,3 +20,15 @@ def timeafter(request,offset):
 	after=now+datetime.timedelta(hours=offset)
 	html="After %s hours it will be %s."%(offset,after)
 	return HttpResponse(html+"\nThe time displayed  here is UTC")
+def contactus(request):
+	peoplelst=[]
+	peoplelst.append(['Rachit','Developer',r'rachittibrewal@gmail.com','+918141633867'])
+	peoplelst.append(['Jugal','Designer',r'choksi.jugal@gmail.com','+919940338082'])
+	return render(request,'contact.html',{'people':peoplelst})
+def display_meta(request):
+	metadict=request.META.items()
+	metadict.sort()
+	return render(request,'display_meta.html',{'metadata':metadict})
+def login(request):
+	return render(request,'login.html',{})
+	

@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-		<!-- css style-sheet -->
+	<title>
+	{% load static %}
+	<link rel="icon" type="img/png"href="{%static "images/favicon.png"%}"alt=""/>
+	Home
+	</title>
+	{%block bootstrapscript%} 	
+	<!-- css style-sheet -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- jquery script -->
 	<script src="https://ajax.googleapis.com"></script>
 	<!-- jS  -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% endblock %}
 </head>
 <body>
-<div class="containeri-fluid">
-<h1>Hi there {{name}}</h1>
-</div>
+{% block body %}
+{% endblock %}
 </body>
 </html>

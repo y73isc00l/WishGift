@@ -16,12 +16,19 @@ Including another URLconf
 from django.conf.urls import include,url
 from django.contrib import admin
 import views
+from django.contrib.sitemaps.views import sitemap
+
 urlpatterns =[
 ##      url(r'^home/$',home),
         url(r'^$',views.home),
         url(r'^index/$',views.index),
         url(r'^time/plus/(\d{1,2})/$',views.timeafter),
-	url(r'^welcome/user/(\w+)/$',views.welcome),
+	url(r'^welcome/user/$',views.welcome),
+	url(r'^contactus/$',views.contactus),
+	url(r'^display_meta/$',views.display_meta),
+	url(r'^login/$',views.login),
 ##      url(r'^polls/',include('polls.url')),##not working 
-    url(r'^admin/', admin.site.urls),
+        url(r'^admin/', admin.site.urls),
+        url(r'^sitemap\.xml$', sitemap),
+        url(r'^robots\.txt$', include('robots.urls')),
 ]

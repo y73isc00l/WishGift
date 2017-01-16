@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact Developers</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<p class="bg-primary"><h1>Meta Data</h1></p>
+</div>
+<div class="container">
+<table class="table">
+<thead>
+	<tr>
+		<th>Key</th>
+		<th>Value</th>
+	</tr>
+</thead>
+<tbody>
+	{% for key,value in metadata %}
+	<tr>
+		<th>{{key}}</th>
+		<th>{{value}}</th>
+	</tr>
+	{% endfor %}
+</tbody>
+</table>
+</div>
+</body>
+</html>

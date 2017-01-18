@@ -37,6 +37,9 @@
   </style>
 </head>
 <body>
+<script>
+
+</script>
 {%load static%}
 <div class="container-fluid">
   <div class="row content">
@@ -62,22 +65,55 @@
           </button>
         </span>
       </div>
-	<font size="300" align=right>
+	<font size="250" align=right>
 		<img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
-		Welcome, {{name}}!
-		
+		<p>Hello,{{user.username}}</p>
 	  </font>
-      <hr>
+      <br>
+      <h4>Your, Wishes</h4>
+      <div class="pre-scrollable">
+      <table class="table">
+      <thead>
+      <th>Wish #</th>
+      <th>Wish</th>
+      <th>Occassion</th>
+      <th>Ocassion Date</th>
+      <th>Description</th>
+      </thead>
+      <tbody>
+	{%for wish in wishes%}
+	<tr>
+	<td>{{forloop.counter}}</td>
+	<td>{{wish.wishitem}}</td>
+	<td>{{wish.occassion}}</td>
+	<td>{{wish.occassion_date}}</td>
+	<td>{{wish.description}}</td>
+	</tr>
+	{%endfor%}
+      </tbody>
+        </table>
+      </div>
       
 
-      <h4>Request a Gift:</h4>
+      <h4>Wish Gift:</h4>
       <form role="form">
         <div class="form-group">
-          <textarea class="form-control" rows="2" required></textarea>
+	 <p>Wish</p>
+          <textarea class="form-control" rows="1" name="wish" required="True"></textarea>
+</div>
+<div class="form-group">
+	<p>Occassion</p>
+          <textarea class="form-control" rows="1" name="occassion" required="False"></textarea>
+        </div>	
+        <div class="form-group">
+         <p>Describe</p>
+          <textarea class="form-control" rows="1" name="wish" required="True"></textarea>
         </div>
+	
+        
         <button type="submit" class="btn btn-success">Add to Wishlist</button>
       </form>
-      <br><br>
+      <br>
       
       
       
@@ -99,5 +135,3 @@
 </font>
 </body>
 </html>
-
-

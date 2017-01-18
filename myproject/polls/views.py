@@ -4,9 +4,9 @@ import datetime
 from django.http import HttpResponse
 from django.http import HttpRequest
 import codecs
-def welcome(request):
-	c={'name':'User'}
-	return render(request,'dashboard.html',c)
+#def welcome(request):
+#	c={'name':'User'}
+#	return render(request,'dashboard.html',c)
 def index(request):
 	return HttpResponse("Hello,World u are at the poll index page number ")
 def home(request):
@@ -29,6 +29,3 @@ def display_meta(request):
 	metadict=request.META.items()
 	metadict.sort()
 	return render(request,'display_meta.html',{'metadata':metadict})
-def login(request):
-	return render(request,'login.html',{})
-	

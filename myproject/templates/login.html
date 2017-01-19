@@ -71,7 +71,7 @@ body {
 <img src="{%static "images/favicon.png"%}" height="90" width="90"/>
 </div>
 <div class="container">
-  
+{%block formswap%}  
   <form action="/welcome/user/"method="post">
  {% csrf_token %}
     <div class="head">
@@ -95,6 +95,7 @@ body {
 	
 	</div>
   </form>
+{% endblock%}
     </div>
 <font color="white">
 <div class="footer navbar-fixed-bottom">

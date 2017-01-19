@@ -19,7 +19,8 @@ class Wishes(models.Model):
 	occassion=models.CharField(max_length=100,null=True)
 	occassion_date=models.DateField(null=True)
 	descriptionwish=models.CharField(max_length=100,blank=True)
-	user=models.ForeignKey(User)	
+	user=models.ForeignKey(User)
+	pub_date=models.DateField(null=True)	
 class Friend(models.Model):
 	email=models.EmailField(null=True)
 	wishes=models.ManyToManyField(Wishes)

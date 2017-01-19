@@ -29,6 +29,8 @@ urlpatterns =[
 	url(r'^display_meta/$',views.display_meta),
 	url(r'^login/$',login.login),
 	url(r'^signup/$',login.signup),
+	url(r'^user/addwish/$',dashboard.Dashboard01addwish),
+	url(r'^user/logout/$',dashboard.logout_view),
 ##      url(r'^polls/',include('polls.url')),##not working 
         url(r'^admin/', admin.site.urls),
         url(r'^sitemap\.xml$', sitemap),

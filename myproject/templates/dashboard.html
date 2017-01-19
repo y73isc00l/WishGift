@@ -16,7 +16,7 @@
     /* Set gray background color and 100% height */
     .sidenav {
       background-color: #f1f1f1;
-      height: 100%;
+      height: 150%;
     }
     
     /* Set black background color, white text and some padding */
@@ -50,8 +50,8 @@
         <li><a href="#section2">Friends</a></li>
         <li><a href="#section3">My Wishlists</a></li>
 		<li><a href="#section4">Discover</a></li>
-		<li><a href="#section5">Profile</a></li>
-		<li><a href="#section6">Account Settings</a></li>
+		<li><a href="#section5">Account Settings</a></li>
+		<li><a href="/user/logout/">Logout</a></li>
       </ul><br>
     </div>
 
@@ -96,7 +96,8 @@
       
 
       <h4>Wish Gift:</h4>
-      <form role="form">
+      <form action="/user/addwish/" role="form" method="POST">
+	{% csrf_token %}
         <div class="form-group">
 	 <p>Wish</p>
           <textarea class="form-control" rows="1" name="wish" required="True"></textarea>
@@ -107,7 +108,7 @@
         </div>	
         <div class="form-group">
          <p>Describe</p>
-          <textarea class="form-control" rows="1" name="wish" required="True"></textarea>
+          <textarea class="form-control" rows="1" name="descriptionwish" required="True"></textarea>
         </div>
 	
         

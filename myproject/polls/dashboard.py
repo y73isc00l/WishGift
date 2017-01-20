@@ -53,3 +53,14 @@ def Dashboard01addwish(request):
 def logout_view(request):
 	logout(request)
 	return render(request,'logout.html')
+def person_viewprofile(request,username):
+	try:
+		p=User.objects.get(username=username)
+		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})	
+	except User.DoesNotExist:
+		return render(request,'person_view.html',{'personusername':'Sorry, try searching for someone in our records'})
+		
+
+
+
+

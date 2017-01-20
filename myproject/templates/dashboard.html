@@ -38,6 +38,22 @@
 </head>
 <body>
 <script>
+	$(document).ready(function(){
+$("#mytable #checkall").click(function () {
+        if ($("#mytable #checkall").is(':checked')) {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+    
+    $("[data-toggle=tooltip]").tooltip();
+});
 
 </script>
 {%load static%}
@@ -72,7 +88,7 @@
       <br>
       <h4>Your, Wishes</h4>
       <div class="pre-scrollable">
-      <table class="table">
+      <table id="mytable" class="table">
       <thead>
       <th>Wish #</th>
       <th>Wish</th>
@@ -87,8 +103,10 @@
 	<td>{{wish.wishitem}}</td>
 	<td>{{wish.occassion}}</td>
 	<td>{{wish.occassion_date}}</td>
-	<td>{{wish.description}}</td>
-	</tr>
+	<td>{{wish.descriptionwish}}</td>
+	<td><a href="/user/editwish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Edit</a></td>
+    <td><a href="/user/deletewish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Delete</a></td>
+				</tr>
 	{%endfor%}
       </tbody>
         </table>

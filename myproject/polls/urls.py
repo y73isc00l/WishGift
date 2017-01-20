@@ -31,6 +31,7 @@ urlpatterns =[
 	url(r'^signup/$',login.signup),
 	url(r'^user/addwish/$',dashboard.Dashboard01addwish),
 	url(r'^user/logout/$',dashboard.logout_view),
+	url(r'^view/(\w+)/$',dashboard.person_viewprofile),
 ##      url(r'^polls/',include('polls.url')),##not working 
         url(r'^admin/', admin.site.urls),
         url(r'^sitemap\.xml$', sitemap),

@@ -49,7 +49,24 @@ def Dashboard01addwish(request):
 	except Wishes.DoesNotExist:
 		tmp.wishes_set.create(wishitem=request.POST['wish'],occassion=request.POST['occassion'],occassion_date=datetime.date.today(),descriptionwish=request.POST['descriptionwish'],pub_date=datetime.date.today())
 	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
-
+@login_required(login_url='/login/')
+def Dashboard01delwish(request,id):
+	tmp=User.objects.get(username=request.user)
+	try:
+		id=int(id)
+	except ValueError:
+		raise Http404
+	try:
+		wish=Wishes.objects.get(id=id)
+		wish.delete()
+	except Wishes.DoesNotExist:
+		msg='The wish does not exist'
+	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
+@login_required(login_url='/login/')
+def Dashboard01editwish(request,hashid):
+	tmp=User.objects.get(username=request.user)
+	#code to be filled
+	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
 def logout_view(request):
 	logout(request)
 	return render(request,'logout.html')

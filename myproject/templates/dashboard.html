@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-  <title>Gift-A-Gift</title>
+  <title>Gift A Gift</title>
  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,6 +73,8 @@ $("#mytable #checkall").click(function () {
 
     <div class="col-sm-10">
 	<br>
+			<form action="\search\" method="get">
+				
 	<div class="input-group" width="20">
         <input type="text" class="form-control" placeholder="Search Gift-A-Gift">
         <span class="input-group-btn">
@@ -81,6 +83,7 @@ $("#mytable #checkall").click(function () {
           </button>
         </span>
       </div>
+			</form>
 	<font size="250" align=right>
 		<img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
 		<p>Hello,{{user.username}}</p>
@@ -98,15 +101,17 @@ $("#mytable #checkall").click(function () {
       </thead>
       <tbody>
 	{%for wish in wishes%}
+				{%if wish.showwish%}
 	<tr>
 	<td>{{forloop.counter}}</td>
 	<td>{{wish.wishitem}}</td>
 	<td>{{wish.occassion}}</td>
 	<td>{{wish.occassion_date}}</td>
 	<td>{{wish.descriptionwish}}</td>
-	<td><a href="/user/editwish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Edit</a></td>
-    <td><a href="/user/deletewish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Delete</a></td>
+	<td><a href="/user/editwish/{{wish.id}}/" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Edit</a></td>
+    <td><a href="/user/deletewish/{{wish.id}}/" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Delete</a></td>
 				</tr>
+				{%endif%}
 	{%endfor%}
       </tbody>
         </table>

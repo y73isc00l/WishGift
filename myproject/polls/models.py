@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 	country_residence=models.CharField(max_length=50,blank=True)
 '''	
 class Wishes(models.Model):
+	showwish=models.BooleanField(default=True)
 	wishitem=models.CharField(max_length=100,null=True)
 	occassion=models.CharField(max_length=100,null=True)
 	occassion_date=models.DateField(null=True)

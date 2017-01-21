@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Gift-A-Gift</title>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 700px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 150%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+<script>
+	$(document).ready(function(){
+$("#mytable #checkall").click(function () {
+        if ($("#mytable #checkall").is(':checked')) {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+    
+    $("[data-toggle=tooltip]").tooltip();
+});
+
+</script>
+{%load static%}
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <h4></h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Home</a></li>
+        <li><a href="#section2">Friends</a></li>
+        <li><a href="#section3">My Wishlists</a></li>
+		<li><a href="#section4">Discover</a></li>
+		<li><a href="#section5">Account Settings</a></li>
+		<li><a href="/user/logout/">Logout</a></li>
+      </ul><br>
+    </div>
+
+    <div class="col-sm-10">
+	<br>
+	<div class="input-group" width="20">
+        <input type="text" class="form-control" placeholder="Search Gift-A-Gift">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+	<font size="250" align=right>
+		<img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
+		<p>Hello,{{user.username}}</p>
+	  </font>
+      <br>
+      <h4>Your, Wishes</h4>
+      <div class="pre-scrollable">
+      <table id="mytable" class="table">
+      <thead>
+      <th>Wish #</th>
+      <th>Wish</th>
+      <th>Occassion</th>
+      <th>Ocassion Date</th>
+      <th>Description</th>
+      </thead>
+      <tbody>
+	{%for wish in wishes%}
+	<tr>
+	<td>{{forloop.counter}}</td>
+	<td>{{wish.wishitem}}</td>
+	<td>{{wish.occassion}}</td>
+	<td>{{wish.occassion_date}}</td>
+	<td>{{wish.descriptionwish}}</td>
+	<td><a href="/user/editwish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Edit</a></td>
+    <td><a href="/user/deletewish/{{wish.id}}" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Delete</a></td>
+				</tr>
+	{%endfor%}
+      </tbody>
+        </table>
+      </div>
+      
+
+      <h4>Wish Gift:</h4>
+      <form action="/user/addwish/" role="form" method="POST">
+	{% csrf_token %}
+        <div class="form-group">
+	 <p>Wish</p>
+          <textarea class="form-control" rows="1" name="wish" required="True"></textarea>
+</div>
+<div class="form-group">
+	<p>Occassion</p>
+          <textarea class="form-control" rows="1" name="occassion" required="False"></textarea>
+        </div>	
+        <div class="form-group">
+         <p>Describe</p>
+          <textarea class="form-control" rows="1" name="descriptionwish" required="True"></textarea>
+        </div>
+	
+        
+        <button type="submit" class="btn btn-success">Add to Wishlist</button>
+      </form>
+      <br>
+      
+      
+      
+      <div class="row">
+       
+        
+      </div>
+    </div>
+  </div>
+</div>
+<font color="white">
+<footer class="container-fluid" align="center">
+  <p><a href="#footer" color=><font color="#ffff66">Contact Us</font></a> | 	
+  <a href="#footer"><font color="#ffff66">Donate</font></a> |
+  <a href="#footer"><font color="#ffff66">Site Map</font></a> |
+  <a href="#footer"><font color="#ffff66">Logout</font></a>
+  <a href="#footer"></a></p>
+</footer>
+</font>
+</body>
+</html>

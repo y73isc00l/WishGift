@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Developers</title>
+		<!-- css style-sheet -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jquery script -->
+	<script src="https://ajax.googleapis.com"></script>
+	<!-- jS  -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="jumbotron">
+<h1>Contact Developers</h1>
+<p>The below contact details have been provided if one would like to help to make the app better.</p>
+</div>
+<div class="table-responsive">
+<table class="table">
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Role</th>
+<th>Email</th>
+<th>Hotline</th>
+</tr>
+</thead>
+<tbody>
+{%for name,role,email,hotline in people%}
+<tr>
+	<td>{{forloop.counter}}</td>
+	<td>{{name}}</td>
+	<td>{{role}}</td>
+	<td>{{email}}</td>
+	<td>{{hotline}}</td>
+</tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
+</body>
+</html>

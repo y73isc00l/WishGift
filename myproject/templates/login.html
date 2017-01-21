@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	User Login
+</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+{%load static%}
+body {
+        background-image: url("{%static "images/jumbotron.jpg"%}");
+		font-family: 'Raleway';
+          font-style:black ;
+          font-weight: 600;
+          src: local('Raleway'), local('Raleway-Regular'), url(http://fonts.gstatic.com/s/raleway/v11/0dTEPzkLWceF7z0koJaX1A.woff2) format('woff2');
+		  color:white;
+		 background-size: cover;
+} 
+.center {
+    margin: auto;
+    width: 25%;
+    padding: 20px;
+}
+.form-group {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+ .checkbox {
+    margin: auto;
+    width: 42%;
+    padding: 0px;
+}
+.button {
+    margin: auto;
+    width: 10%;
+    padding: 10px;
+}
+.head {
+    margin: auto;
+    width: 50%;
+    padding: 25px;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 40px; /* .push must be the same height as .footer */
+	background-color: #555;
+      color: white;
+      padding-top: 10px;
+	  margin:auto;
+	  text-align:center;
+}
+	
+</style>
+
+</head>
+
+<body align="center1">
+<div class="container">
+<img src="{%static "images/favicon.png"%}" height="90" width="90"/>
+</div>
+<div class="container">
+{%block formswap%}  
+  <form action="/welcome/user/"method="post">
+ {% csrf_token %}
+    <div class="head">
+	<h1>User Login</h1>
+	</div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" size="20">
+		</div>
+	      <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" name="passwd" id="pwd" placeholder="Enter password">
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+	<div class="button">
+    <button type="submit" class="btn btn-default">Submit</button>
+	
+	<p>{{message}}</p>
+	
+	</div>
+  </form>
+{% endblock%}
+    </div>
+<font color="white">
+<div class="footer navbar-fixed-bottom">
+  <p><a href="/contactus/" color=><font color="#ffff66">Contact Us</font></a> | 	
+  <a href="#footer"><font color="#ffff66">Donate</font></a> |
+  <a href="#footer"><font color="#ffff66">Site Map</font></a>
+  <a href="#footer"></a></p>
+</div>
+</font>
+
+</body>
+</html>

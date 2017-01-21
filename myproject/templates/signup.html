@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	User Login
+</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body {
+        background-image: url("/static/images/jumbotron.jpg");
+		font-family: 'Raleway';
+          font-style:black ;
+          font-weight: 600;
+          src: local('Raleway'), local('Raleway-Regular'), url(http://fonts.gstatic.com/s/raleway/v11/0dTEPzkLWceF7z0koJaX1A.woff2) format('woff2');
+		  color:white;
+		 background-size: cover;
+} 
+.center {
+    margin: auto;
+    width: 25%;
+    padding: 20px;
+}
+.btn--green {
+	background-color:#05af3c;
+	color: #ffffff;
+}
+.centertext {
+ margin: auto;
+    width: 16%;
+    padding: 20px;;
+}
+.form-group {
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+}
+ .checkbox {
+    margin: auto;
+    width: 37%;
+    padding: 0px;
+}
+.button {
+    margin: auto;
+    width: 10%;
+    padding: 10px;
+}
+.head {
+    margin: auto;
+    width: 50%;
+    padding: 25px;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 40px; /* .push must be the same height as .footer */
+	background-color: #555;
+      color: white;
+      padding-top: 10px;
+	  margin:auto;
+	  text-align:center;
+}
+ .panel-transparent {
+        background: none;
+    }
+
+    .panel-transparent .panel-heading{
+        background: rgba(122, 130, 136, 0.2)!important;
+		width=50%;
+    }
+
+    .panel-transparent .panel-body{
+        background: rgba(46, 51, 56, 0.2)!important;
+				width=50%;
+    }
+	
+</style>
+
+</head>
+
+<body align="center1">
+<img src="/static/images/favicon.png" height="90" width="90">
+
+ 
+  <form action="/login/" method="post">
+		{%csrf_token%}
+		<div class="panel-heading">
+	<h1 align="center">Create an Account</h1>
+		</div>
+
+	<div class="panel-body">
+	<div class="form-group">
+      <label for="text">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" size="20">
+		</div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" size="20">
+		</div>
+	      <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="passwd" placeholder="Enter password">
+    </div>
+	 <div class="form-group">
+      <label for="pwd">Confirm Password:</label>
+      <input type="password" class="form-control" id="pwd" name="confirmpasswd"placeholder="Re-enter password">
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox"> I agree to the Terms and Conditions</label>
+    </div>
+    <div class="button">
+    <button type="submit" class="btn btn--green btn--block submit"><h4 padding-top="0px">&nbsp;&nbsp;&nbsp;Sign Me Up!&nbsp;&nbsp;&nbsp;</h4></button>
+	
+	</div>
+	<div class="centertext">
+	{%if message%}
+	<p>Please correct the following errors.</p>
+
+	{%for error in message%}
+	<li><ul>{{error}}</ul></li>
+	{%endfor%}
+	
+	{%endif%}
+	<p>Already have an account,</p><a href="/login"><font color="#a2ff00" size="3"><b> Login</font></a>!
+	</div>
+	</div>
+  </form>
+ 
+<font color="white">
+<div class="footer navbar-fixed-bottom">
+  <p><a href="#footer" color=><font color="#ffff66">Contact Us</font></a> | 	
+  <a href="#footer"><font color="#ffff66">Donate</font></a> |
+  <a href="#footer"><font color="#ffff66">Site Map</font></a>
+  <a href="#footer"></a></p>
+</div>
+</font>
+
+</body>
+</html>

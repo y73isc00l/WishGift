@@ -39,9 +39,13 @@ urlpatterns =[
 	#dashboard url that adds wishes and login is required for this feature
 	url(r'^user/addwish/$',dashboard.Dashboard01addwish),
 	#url to delete wishes
-	url(r'user/deletewish/(\d+)/$',dashboard.Dashboard01delwish),
+	url(r'user/deletewish/(\w+)/$',dashboard.Dashboard01delwish),
 	#url to edit wishes
-	url(r'user/editwish/(\d+)/$',dashboard.Dashboard01editwish),
+	url(r'user/editwish/(\w+)/$',dashboard.Dashboard01editwish),
+	#url to grant wish to a person while viewing profile,login is required,without login the user will stay on the page with a error message
+	url(r'^user/grantwish/(\w+)/(\w+)/$',dashboard.Dashboard01grantwish),
+	#url to add friend'
+	url(r'^user/addfriend/(\w+)/$',dashboard.Dashboard01addfriend),
 	#dashboard feature that allows users to logout and login is required and redirects to login page
 	url(r'^user/logout/$',dashboard.logout_view),
 	#url that allows users to view the profile of other users

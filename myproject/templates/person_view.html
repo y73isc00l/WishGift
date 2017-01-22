@@ -5,10 +5,25 @@
                 <img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
 
                 <p>{{personusername}}</p>
+          <a href="/user/addfriend/{{personusername}}/" class="button2" role="button" data-title="" data-id="">Add Friend</a>
                             
           </font>
 
 {%endblock%}
+
+{%block whosewish%}
+<h4>
+  Wishes
+</h4>
+{%endblock%}
+
+{%block wishoptions%}
+<td><a href="/user/grantwish/{{personusername}}/{{wish.hashid}}/" class="button1" role="button" data-title="" data-id="">Grant</a></td>
+{%endblock%}
+
 {%block wishformswap%}
 <h4>Gift Wish!!</h4>
+<h6>
+  {{message}}
+</h6>
 {%endblock%}

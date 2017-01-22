@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-
+import datetime
+# import django.utils.timezone
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -16,12 +17,14 @@ from django.contrib.auth.models import User
 '''	
 class Wishes(models.Model):
 	showwish=models.BooleanField(default=True)
+	hashid=models.CharField(max_length=32,blank=True)
 	wishitem=models.CharField(max_length=100,null=True)
 	occassion=models.CharField(max_length=100,null=True)
 	occassion_date=models.DateField(null=True)
 	descriptionwish=models.CharField(max_length=100,blank=True)
 	user=models.ForeignKey(User)
-	pub_date=models.DateField(null=True)	
+	pub_date=models.DateField(null=True)
+	updated_at=models.DateField(auto_now=True,null=True)
 class Friend(models.Model):
 	email=models.EmailField(null=True)
 	wishes=models.ManyToManyField(Wishes)

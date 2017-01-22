@@ -18,7 +18,59 @@
       background-color: #f1f1f1;
       height: 150%;
     }
-    
+    .button {
+  border-radius: 4px;
+  background-color: white;
+  border: 2px solid #DD4B39;
+  color: #DD4B39;
+  text-align: center;
+  font-size: 18px;
+  padding-left:10px;
+	padding-right:10px;
+  width: 200px;
+  cursor: pointer;
+  margin: 5px 5px;
+}
+	.button:hover {
+    background-color: #DD4B39; /* Red */
+    color: white;
+}
+    .button1 {
+  border-radius: 4px;
+  background-color: white;
+  border: 2px solid #05AF3C;
+  color: #05AF3C;
+  text-align: center;
+  font-size: 18px;
+  padding-left:10px;
+	padding-right:10px;
+  width: 200px;
+  cursor: pointer;
+  margin: 5px 5px;
+}
+	.button1:hover {
+    background-color: #05AF3C; /* Green */
+    color: white;
+}
+		    .button2 {
+  border-radius: 4px;
+  background-color: white;
+  border: 2px solid #000080;
+  color: #000080;
+  text-align: center;
+  font-size: 18px;
+  padding-left:10px;
+	padding-right:10px;
+  width: 200px;
+  cursor: pointer;
+  margin: 5px 5px;
+}
+	.button2:hover {
+    background-color: #000080; /* Green */
+    color: white;
+}
+
+
     /* Set black background color, white text and some padding */
     footer {
       background-color: #555;
@@ -38,22 +90,6 @@
 </head>
 <body>
 <script>
-	$(document).ready(function(){
-$("#mytable #checkall").click(function () {
-        if ($("#mytable #checkall").is(':checked')) {
-            $("#mytable input[type=checkbox]").each(function () {
-                $(this).prop("checked", true);
-            });
-
-        } else {
-            $("#mytable input[type=checkbox]").each(function () {
-                $(this).prop("checked", false);
-            });
-        }
-    });
-    
-    $("[data-toggle=tooltip]").tooltip();
-});
 
 </script>
 {%load static%}
@@ -78,18 +114,22 @@ $("#mytable #checkall").click(function () {
 	<div class="input-group" width="20">
         <input type="text" class="form-control" placeholder="Search Gift-A-Gift">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
+          <button class="btn btn-default" type="submit">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </span>
       </div>
 			</form>
+			{%block bodyhead%}
 	<font size="250" align=right>
 		<img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
 		<p>Hello,{{user.username}}</p>
 	  </font>
+			{%endblock%}
       <br>
+			{%block whosewish%}
       <h4>Your, Wishes</h4>
+			{%endblock%}
       <div class="pre-scrollable">
       <table id="mytable" class="table">
       <thead>
@@ -102,14 +142,16 @@ $("#mytable #checkall").click(function () {
       <tbody>
 	{%for wish in wishes%}
 				{%if wish.showwish%}
-	<tr>
+	<tr bgcolor="#6BF442">
 	<td>{{forloop.counter}}</td>
 	<td>{{wish.wishitem}}</td>
 	<td>{{wish.occassion}}</td>
 	<td>{{wish.occassion_date}}</td>
 	<td>{{wish.descriptionwish}}</td>
-	<td><a href="/user/editwish/{{wish.id}}/" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Edit</a></td>
-    <td><a href="/user/deletewish/{{wish.id}}/" class="confirm-delete btn mini red-stripe" role="button" data-title="" data-id="">Delete</a></td>
+		{%block wishoptions%}
+	<td><a href="/user/editwish/{{wish.hashid}}/" class="button1" role="button" data-title="" data-id="">Edit</a></td>
+    <td><a href="/user/deletewish/{{wish.hashid}}/" class="button" role="button" data-title="" data-id="">Delete</a></td>
+			{%endblock%}	
 				</tr>
 				{%endif%}
 	{%endfor%}
@@ -117,7 +159,7 @@ $("#mytable #checkall").click(function () {
         </table>
       </div>
       
-
+			{%block wishformswap%}
       <h4>Wish Gift:</h4>
       <form action="/user/addwish/" role="form" method="POST">
 	{% csrf_token %}
@@ -138,7 +180,7 @@ $("#mytable #checkall").click(function () {
         <button type="submit" class="btn btn-success">Add to Wishlist</button>
       </form>
       <br>
-      
+      {%endblock%}
       
       
       <div class="row">

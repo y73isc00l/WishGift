@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 ##from models import Personuser,Wishes,Friend
+import hashlib
 from models import Wishes,Friend
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
@@ -47,17 +48,19 @@ def Dashboard01addwish(request):
 	try:
 		wishcheck=tmp.wishes_set.get(wishitem=request.POST['wish'])
 	except Wishes.DoesNotExist:
+		m=hashlib.md5()
 		tmp.wishes_set.create(wishitem=request.POST['wish'],occassion=request.POST['occassion'],occassion_date=datetime.date.today(),descriptionwish=request.POST['descriptionwish'],pub_date=datetime.date.today())
+		w=tmp.wishes_set.get(wishitem=request.POST['wish'])
+		m.update(w.wishitem)
+		m.update(str(w.id))
+		w.hashid=m.hexdigest()
+		w.save()
 	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
 @login_required(login_url='/login/')
-def Dashboard01delwish(request,id):
+def Dashboard01delwish(request,hashid):
 	tmp=User.objects.get(username=request.user)
 	try:
-		id=int(id)
-	except ValueError:
-		raise Http404
-	try:
-		wish=Wishes.objects.get(id=id)
+		wish=Wishes.objects.get(hashid=hashid)
 		wish.delete()
 	except Wishes.DoesNotExist:
 		msg='The wish does not exist'
@@ -67,12 +70,41 @@ def Dashboard01editwish(request,hashid):
 	tmp=User.objects.get(username=request.user)
 	#code to be filled
 	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
+def Dashboard01grantwish(request,usrname,hashid):
+	try:
+		p=User.objects.get(username=usrname)
+	except User.DoesNotExist:
+		return render(request,'person_view.html',{'personusername':'Sorry, try searching for someone in our records'})
+	try:
+		wish=Wishes.objects.get(hashid=hashid)
+	except Wishes.DoesNotExist:
+		return render(request,'person_view.html',{'personusername':'Sorry, the user does not have that wish'})
+	if request.user.is_authenticated:
+		try:
+			tmp=p.friend_set.get(username=request.user)
+			tmp.friend.add(wish)
+			return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})			
+		except Friend.DoesNotExist:
+			return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all(),'message':'You must be friends with user.'})
+	else:
+		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all(),'message':'You must login first.'})
+def Dashboard01addfriend(request,usrname):
+	try:
+		p=User.objects.get(username=usrname)
+	except User.DoesNotExist:
+		return render(request,'person_view.html',{'personusername':'Sorry, try searching for someone in our records'})
+	if request.user.is_authenticated:
+		user=User.objects.get(username=request.user)
+		user.friend_set.create(email=p.email)
+		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})
+	else:
+		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all(),'message':'You must login first.'})
 def logout_view(request):
 	logout(request)
 	return render(request,'logout.html')
-def person_viewprofile(request,username):
+def person_viewprofile(request,usrname):
 	try:
-		p=User.objects.get(username=username)
+		p=User.objects.get(username=usrname)
 		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})	
 	except User.DoesNotExist:
 		return render(request,'person_view.html',{'personusername':'Sorry, try searching for someone in our records'})

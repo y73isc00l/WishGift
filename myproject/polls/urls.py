@@ -36,6 +36,8 @@ urlpatterns =[
 	url(r'^display_meta/$',views.display_meta),
 	#leads to the dashboard
 	url(r'^welcome/user/$',dashboard.Dashboard01),
+	#dashboard url that displays search results
+	url(r'search/',dashboard.Dashboard01search),
 	#dashboard url that adds wishes and login is required for this feature
 	url(r'^user/addwish/$',dashboard.Dashboard01addwish),
 	#url to delete wishes

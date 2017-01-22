@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 '''	
 class Wishes(models.Model):
 	showwish=models.BooleanField(default=True)
+	isgranted=models.BooleanField(default=False)
 	hashid=models.CharField(max_length=32,blank=True)
 	wishitem=models.CharField(max_length=100,null=True)
 	occassion=models.CharField(max_length=100,null=True)
@@ -29,6 +30,8 @@ class Friend(models.Model):
 	email=models.EmailField(null=True)
 	wishes=models.ManyToManyField(Wishes)
 	user=models.ForeignKey(User)
+	class Meta:
+		unique_together=('email','user',)
 class Extradetails(models.Model):
 	firstname=models.CharField(max_length=64,blank=True)
 	lastname=models.CharField(max_length=64,blank=True)

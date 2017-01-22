@@ -98,7 +98,7 @@
     <div class="col-sm-2 sidenav">
       <h4></h4>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Home</a></li>
+        <li {%block activeswap%}class="active"{%endblock%}><a href="/welcome/user/">Home</a></li>
         <li><a href="#section2">Friends</a></li>
         <li><a href="#section3">My Wishlists</a></li>
 		<li><a href="#section4">Discover</a></li>
@@ -112,7 +112,7 @@
 			<form action="\search\" method="get">
 				
 	<div class="input-group" width="20">
-        <input type="text" class="form-control" placeholder="Search Gift-A-Gift">
+        <input type="text" class="form-control" name="searchbar" placeholder="Search Gift A Gift">
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <span class="glyphicon glyphicon-search"></span>
@@ -130,6 +130,7 @@
 			{%block whosewish%}
       <h4>Your, Wishes</h4>
 			{%endblock%}
+			{%block tableswap%}
       <div class="pre-scrollable">
       <table id="mytable" class="table">
       <thead>
@@ -142,7 +143,11 @@
       <tbody>
 	{%for wish in wishes%}
 				{%if wish.showwish%}
-	<tr bgcolor="#6BF442">
+				{%if wish.isgranted%}
+	<tr bgcolor="#E2FF84">
+		{%else%}
+		<tr>
+		{%endif%}
 	<td>{{forloop.counter}}</td>
 	<td>{{wish.wishitem}}</td>
 	<td>{{wish.occassion}}</td>
@@ -158,7 +163,7 @@
       </tbody>
         </table>
       </div>
-      
+      {%endblock%}
 			{%block wishformswap%}
       <h4>Wish Gift:</h4>
       <form action="/user/addwish/" role="form" method="POST">

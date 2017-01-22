@@ -1,0 +1,26 @@
+{%extends 'dashboard.html'%}
+{%load static%}
+{%block activeswap%}
+{%endblock%}
+{%block bodyhead%}
+        <font size="250" align=right>
+                <img src="{% static "images/favicon.png"%}" height="140" width="140" alt=""/>
+                <p>Search Results</p>                            
+          </font>
+
+{%endblock%}
+{%block whosewish%}
+{%endblock%}
+{%block tableswap%}
+{%if searchresult%}
+<li>
+  {%for user in searchresult%}
+  <ul><h4>{{user.username}}   {{user.email}}</h4></ul>
+  {%endfor%}
+</li>
+{%else%}
+
+{%endif%}
+{%endblock%}
+{%block wishformswap%}
+{%endblock%}

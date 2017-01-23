@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include,url
 from django.contrib import admin
-import views
-import login
 from django.contrib.sitemaps.views import sitemap
+import login
+import views
 import dashboard
+import pool
 urlpatterns =[
 #url leads to the home page of the site
         url(r'^$',views.home),
@@ -34,6 +35,7 @@ urlpatterns =[
   #url leads to contact page
 	url(r'^contactus/$',views.contactus),
 	url(r'^display_meta/$',views.display_meta),
+	###start Dashboard
 	#leads to the dashboard
 	url(r'^welcome/user/$',dashboard.Dashboard01),
 	#dashboard url that displays search results
@@ -48,6 +50,11 @@ urlpatterns =[
 	url(r'^user/grantwish/(\w+)/(\w+)/$',dashboard.Dashboard01grantwish),
 	#url to add friend'
 	url(r'^user/addfriend/(\w+)/$',dashboard.Dashboard01addfriend),
+	###end Dashboard
+	###start poolgift
+	##poolgifting welcome page
+	url(r'^/poolgift/welcome/$',pool.welcome),		
+	###end poolgift
 	#dashboard feature that allows users to logout and login is required and redirects to login page
 	url(r'^user/logout/$',dashboard.logout_view),
 	#url that allows users to view the profile of other users

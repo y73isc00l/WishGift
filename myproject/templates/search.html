@@ -13,13 +13,21 @@
 {%endblock%}
 {%block tableswap%}
 {%if searchresult%}
-<li>
+<div class="pre-scrollable">
+<ul>
   {%for user in searchresult%}
-  <ul><h4>{{user.username}}   {{user.email}}</h4></ul>
+  <li><h4><a href="/view/{{user.username}}/">{{user.username}}</a></h4></li>
   {%endfor%}
-</li>
+  </ul>
+</div>
+     
 {%else%}
-
+  
+<p>
+  <h4>
+    Try Searching for someone in our records.
+</h4>
+</p>
 {%endif%}
 {%endblock%}
 {%block wishformswap%}

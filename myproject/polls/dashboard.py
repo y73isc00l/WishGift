@@ -24,7 +24,7 @@ import datetime
         return render(request,'dashboard.html',{'user':p,'wishes':p.wishes_set.all(),'friends':p.friend_set.all()})'''
 #module to display the dashboard of authenticated user
 def Dashboard01(request):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
                 tmp=User.objects.get(username=request.user)
         	return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
         else:

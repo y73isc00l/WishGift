@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse,HttpRequest
+from django.contrib.auth import authenticate, login,logout
+
 ##from models import Personuser
 def login(request):
+	if request.user.is_authenticated:
+		logout(request)
 	mlst=[]
 	passwdmatch=False
 	usernameunique=False

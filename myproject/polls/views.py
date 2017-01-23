@@ -3,6 +3,10 @@ import datetime
 # Create your iviews here.
 from django.http import HttpResponse
 from django.http import HttpRequest
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import login_required
+
 import codecs
 #def welcome(request):
 #	c={'name':'User'}
@@ -10,6 +14,9 @@ import codecs
 def index(request):
 	return HttpResponse("Hello,World u are at the poll index page number ")
 def home(request):
+	if request.user.is_authenticated:
+		tmp=User.objects.get(username=request.user)
+		return render(request,'dashboard.html',{'user':tmp,'wishes':tmp.wishes_set.all(),'friend':tmp.friend_set.all()})
 	return render(request,'home.html',{})
 def timeafter(request,offset):
 	now=datetime.datetime.now()

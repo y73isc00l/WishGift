@@ -53,7 +53,9 @@ urlpatterns =[
 	###end Dashboard
 	###start poolgift
 	##poolgifting welcome page
-	url(r'^/poolgift/welcome/$',pool.welcome),		
+	url(r'^poolgift/welcome/$',pool.poolwelcome),
+	url(r'^user/joinpool/$',pool.joinpool),
+	url(r'^user/createpool',pool.createpool),
 	###end poolgift
 	#dashboard feature that allows users to logout and login is required and redirects to login page
 	url(r'^user/logout/$',dashboard.logout_view),

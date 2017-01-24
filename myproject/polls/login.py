@@ -14,7 +14,7 @@ def login(request):
 		try:
 		#	p=Personuser.objects.get(email=request.POST['email'])
 			user=User.objects.get(email=request.POST['email'])
-			return render(request,'signup.html',{'message':'The account already exists'})
+			return render(request,'signup.html',{'message':('The account already exists',)})
 		except User.DoesNotExist:
 			try:
 				tmp=User.objects.get(username=request.POST['username'])

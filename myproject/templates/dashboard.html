@@ -69,6 +69,109 @@
     background-color: #000080; /* Green */
     color: white;
 }
+		.center {
+    margin: auto;
+    width: 25%;
+    padding: 20px;
+}
+.centertext {
+	margin: auto;
+    width: 25%;
+    padding: 20px;;
+}
+				    .button3 {
+  border-radius: 4px;
+  background-color: #00f4511e;
+  border:  2px solid #6bf442;
+  color: #6bf442;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  width: 230px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button3 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button3 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  text-size:20px;
+  right: -40px;
+  transition: 0.5s;
+}
+
+.button3:hover span {
+  padding-right: 25px;
+}
+
+.button3:hover {
+
+  background-color:#6bf442;
+  color: #00ffffff;
+ }
+
+.button3:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+			
+			
+			.button4 {
+  border-radius: 4px;
+  background-color: #00f4511e;
+  border:  2px solid #52c4f2;
+  color: #52c4f2;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  width: 230px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button4 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button4 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  text-size:20px;
+  right: -40px;
+  transition: 0.5s;
+}
+
+.button4:hover span {
+  padding-right: 25px;
+}
+
+.button4:hover {
+
+  background-color:#52c4f2;
+  color: #00ffffff;
+ }
+
+.button4:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 
 
     /* Set black background color, white text and some padding */
@@ -98,15 +201,15 @@
     <div class="col-sm-2 sidenav">
       <h4></h4>
       <ul class="nav nav-pills nav-stacked">
-        <li {%block activeswap%}class="active"{%endblock%}><a href="/welcome/user/">Home</a></li>
+        <li {%block activeswap01%}class="active"{%endblock%}><a href="/welcome/user/">Home</a></li>
         <li><a href="#section2">Friends</a></li>
         <li><a href="#section3">My Wishlists</a></li>
-		<li><a href="/poolgift/welcome/">Pool Gift</a></li>
+		<li {%block activeswap04%}{%endblock%}><a href="/poolgift/welcome/">Pool Gift</a></li>
 		<li><a href="#section5">Account Settings</a></li>
 		<li><a href="/user/logout/">Logout</a></li>
       </ul><br>
     </div>
-
+		{%block col10swap%}
     <div class="col-sm-10">
 	<br>
 			<form action="\search\" method="get">
@@ -132,25 +235,26 @@
 			{%endblock%}
 			{%block tableswap%}
       <div class="pre-scrollable">
+				{%regroup wishes by occassion as wish_table%}
+				{%for occassion in wish_table%}
+				<h4>
+					{{occassion.grouper}}
+				</h4>
       <table id="mytable" class="table">
       <thead>
-      <th>Wish #</th>
       <th>Wish</th>
-      <th>Occassion</th>
       <th>Ocassion Date</th>
       <th>Description</th>
       </thead>
       <tbody>
-	{%for wish in wishes%}
+	{%for wish in occassion.list%}
 				{%if wish.showwish%}
 				{%if wish.isgranted%}
 	<tr bgcolor="#E2FF84">
 		{%else%}
 		<tr>
 		{%endif%}
-	<td>{{forloop.counter}}</td>
 	<td>{{wish.wishitem}}</td>
-	<td>{{wish.occassion}}</td>
 	<td>{{wish.occassion_date}}</td>
 	<td>{{wish.descriptionwish}}</td>
 		{%block wishoptions%}
@@ -162,6 +266,8 @@
 	{%endfor%}
       </tbody>
         </table>
+				{%endfor%}
+				
       </div>
       {%endblock%}
 			{%block wishformswap%}
@@ -193,6 +299,7 @@
         
       </div>
     </div>
+		{%endblock%}
   </div>
 </div>
 <font color="white">

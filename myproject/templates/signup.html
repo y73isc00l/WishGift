@@ -100,19 +100,19 @@ body {
 	<div class="panel-body">
 	<div class="form-group">
       <label for="text">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" size="20">
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required size="20">
 		</div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" size="20">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required size="20">
 		</div>
 	      <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="passwd" placeholder="Enter password">
+      <input type="password" class="form-control" id="pwd" name="passwd" required placeholder="Enter password">
     </div>
 	 <div class="form-group">
       <label for="pwd">Confirm Password:</label>
-      <input type="password" class="form-control" id="pwd" name="confirmpasswd"placeholder="Re-enter password">
+      <input type="password" class="form-control" id="pwd" name="confirmpasswd" required placeholder="Re-enter password">
     </div>
 	<div class="checkbox">
       <label><input type="checkbox"> I agree to the Terms and Conditions</label>
@@ -122,14 +122,15 @@ body {
 	
 	</div>
 	<div class="centertext">
+		
 	{%if message%}
-	<p>Please correct the following errors.</p>
-
-	{%for error in message%}
-	<li><ul>{{error}}</ul></li>
-	{%endfor%}
 	
+	{%for error in message%}
+	{{error}}<br>
+	{%endfor%}
+		
 	{%endif%}
+	
 	<p>Already have an account,</p><a href="/login"><font color="#a2ff00" size="3"><b> Login</font></a>!
 	</div>
 	</div>

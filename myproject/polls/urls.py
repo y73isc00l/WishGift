@@ -20,6 +20,7 @@ import login
 import views
 import dashboard
 import pool
+import giftcrawler
 urlpatterns =[
 #url leads to the home page of the site
         url(r'^$',views.home),
@@ -50,12 +51,18 @@ urlpatterns =[
 	url(r'^user/grantwish/(\w+)/(\w+)/$',dashboard.Dashboard01grantwish),
 	#url to add friend'
 	url(r'^user/addfriend/(\w+)/$',dashboard.Dashboard01addfriend),
+	url(r'^user/friends/$',dashboard.Dashboard01friends),
+	url(r'^user/intelli/$',giftcrawler.intelligiftsearch),
+	url(r'^user/accountsetting/$',dashboard.Dashboard01settings),
+	url(r'^user/editsettings/$',dashboard.Dashboard01changesettings),
 	###end Dashboard
 	###start poolgift
 	##poolgifting welcome page
 	url(r'^poolgift/welcome/$',pool.poolwelcome),
 	url(r'^user/joinpool/$',pool.joinpool),
 	url(r'^user/createpool',pool.createpool),
+	url(r'^pooldashboard/$',pool.pooldashboard),
+	url(r'pooldashboard/(\w+)/$',pool.dashboardview),
 	###end poolgift
 	#dashboard feature that allows users to logout and login is required and redirects to login page
 	url(r'^user/logout/$',dashboard.logout_view),

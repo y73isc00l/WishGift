@@ -5,7 +5,94 @@
 class="active"
 {%endblock%}
 {%block col10swap%}
+
+
+
+<script type="text/javascript">
+function showfield(name){
+  if(name=='other')document.getElementById('div1').innerHTML='<input class="form-control" type="text" name="occasion" placeholder="Occasion" />';
+  else document.getElementById('div1').innerHTML='';
+}
+</script>
+
+
+
+
 <div class="col-sm-10">
- 
+<h2 class="text-center"><strong>Create pool</strong></h2>
+<form action="/pooldashboard/" method='post'>
+{%csrf_token%}
+  <div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Poolname</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="text" placeholder="Name your Pool" name="poolname" id="poolname">
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Recipient</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="text" placeholder="this pool is for..." name="recipient" id="reciepent">
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-sm-2 col-form-label">Occasion</label>
+  <div class="col-sm-6">
+    <select class="form-control" name="occasion" id="occasion-dd-list" onchange="showfield(this.options[this.selectedIndex].value)">
+      <option value="birthday">Birthday</option>
+      <option value="marriage-anniversary">Marriage Anniversary</option>
+      <option value="wedding">Wedding</option>
+      <option value="engagement">Engagement</option>
+      <option value="house-warming">House-Warming</option>
+      <option value="baby-shower">Baby-shower</option>
+      <option value="inaugration">Inaugration</option>
+      <option id="other-occasion">other</option>
+    </select>
+    <div id="div1"></div>
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label" >Occasion-Date</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="date" placeholder="Occasion-date" name="occasiondate" id="occasion-date">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Price-Range</label>
+  <div class="col-xs-3">
+    <input class="form-control" type="number" placeholder="Min contribution per head" name="minprice" id="min-price">
+  </div>
+  <div class="col-xs-3">
+    <input class="form-control" type="number" placeholder="Max contribution per head" name="maxprice" id="max-price">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Gift choice 01</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="text" placeholder="To be decided" name="giftchoice01" id="">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Gift choice 02</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="text" placeholder="To be decided" name="giftchoice02" id="">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-xs-2 col-form-label">Gift choice 03</label>
+  <div class="col-xs-6">
+    <input class="form-control" type="text" placeholder="To be decided" name="giftchoice03" id="">
+  </div>
+</div>
+
+<button type="submit" class="btn btn-success">Create Pool</button>
+</form>
 </div>
 {%endblock%}

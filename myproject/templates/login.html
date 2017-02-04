@@ -11,9 +11,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-{%load static%}
+.btn--green {
+	background-color:#05af3c;
+	color: #ffffff;
+}
+.centertext {
+ margin: auto;
+    width: 25%;
+    padding: 20px;;
+}
 body {
-        background-image: url("{%static "images/jumbotron.jpg"%}");
+        background-image: url("/static/images/jumbotron.jpg");
 		font-family: 'Raleway';
           font-style:black ;
           font-weight: 600;
@@ -38,7 +46,7 @@ body {
 }
 .button {
     margin: auto;
-    width: 10%;
+    width: 32%;
     padding: 10px;
 }
 .head {
@@ -54,12 +62,22 @@ body {
     margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
 }
 .footer, .push {
-    height: 40px; /* .push must be the same height as .footer */
+    height: 60px; /* .push must be the same height as .footer */
 	background-color: #555;
       color: white;
-      padding-top: 10px;
+      padding-top: 20px;
 	  margin:auto;
 	  text-align:center;
+}
+@media only screen and (max-width: 600px) {
+    .form-group {
+        min-width: 80%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .form-group {
+        min-width: 60%;
+    }
 }
 	
 </style>
@@ -67,16 +85,26 @@ body {
 </head>
 
 <body align="center1">
-<div class="container">
-<img src="{%static "images/favicon.png"%}" height="90" width="90"/>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1357506337639398";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div style="padding:5px">
+<a href="/home">
+<img src="/static/images/favicon.png" height="125" width="125">
+</a>
 </div>
-<div class="container">
-{%block formswap%}  
+<div class="container" style="padding:50px">
+  {%block formswap%}
   <form action="/welcome/user/"method="post">
- {% csrf_token %}
-    <div class="head">
-	<h1>User Login</h1>
-	</div>
+  {% csrf_token %}
+    <div class="panel-heading">
+	<h1 align="center">User Login</h1>
+		</div>
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" size="20">
@@ -89,19 +117,24 @@ body {
       <label><input type="checkbox"> Remember me</label>
     </div>
 	<div class="button">
-    <button type="submit" class="btn btn-default">Submit</button>
-	
+    <div class="button">
+    <button type="submit" class="btn btn--green btn--block submit"><h4 padding-top="0px">&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;</h4></button>
 	<p>{{message}}</p>
-	
+			<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
 	</div>
+	</div>
+	<div class="centertext">
+	Don't have an account?<a href="/signup/"><font color="#a2ff00" size="3"><b> Sign Up</b></font></a>!
+	</div>
+
   </form>
-{% endblock%}
+  {% endblock%}
     </div>
 <font color="white">
 <div class="footer navbar-fixed-bottom">
-  <p><a href="/contactus/" color=><font color="#ffff66">Contact Us</font></a> | 	
-  <a href="#footer"><font color="#ffff66">Donate</font></a> |
-  <a href="#footer"><font color="#ffff66">Site Map</font></a>
+  <p><a href="#footer" color=><font color="#ffff66" size="3">Contact Us</font></a> | 	
+  <a href="#footer"><font color="#ffff66" size="3">Donate</font></a> |
+  <a href="#footer"><font color="#ffff66" size="3">Site Map</font></a>
   <a href="#footer"></a></p>
 </div>
 </font>

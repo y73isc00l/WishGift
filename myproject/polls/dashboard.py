@@ -125,16 +125,31 @@ def Dashboard01addfriend(request,usrname):
 			return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})
 	else:
 		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all(),'message':'You must login first.'})
+@login_required(login_url='/login/')
+def Dashboard01friends(request):
+	tmp=User.objects.get(username=request.user)
+	friend_username_list=[]
+	for friend in tmp.friend_set.all():
+		friend_username_list.append(User.objects.get(email=friend.email))
+	return render(request,'friendlist.html',{'friends':friend_username_list})
+@login_required(login_url='/login/')
+def Dashboard01settings(request):
+	return render(request,'accountsetting.html')
 def logout_view(request):
 	logout(request)
 	return render(request,'logout.html')
+@login_required(login_url='/login/')
+def Dashboard01changesettings(request):
+	tmp=User.objects.get(username=request.user)
+	
+	return render(request,'accountsetting.html')
 def person_viewprofile(request,usrname):
 	try:
 		p=User.objects.get(username=usrname)
 		return render(request,'person_view.html',{'personusername':p.username,'wishes':p.wishes_set.all()})	
 	except User.DoesNotExist:
 		return render(request,'person_view.html',{'personusername':'Sorry, try searching for someone in our records'})
-		
+
 
 
 

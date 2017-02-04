@@ -1,0 +1,12 @@
+{%extends 'dashboard.html'%}
+{%block activeswap01%}
+{%endblock%}
+{%block activeswap}
+{%block activeswap02%}
+class="active"
+{%endblock%}
+{%block col10swap%}
+<div class="col-sm-10">
+ 
+</div>
+{%endblock%}

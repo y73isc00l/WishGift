@@ -34,6 +34,8 @@ class Friend(models.Model):
 		unique_together=('email','user',)
 class Extradetails(models.Model):
 	firstname=models.CharField(max_length=64,blank=True)
+	gender=models.CharField(max_length=16,blank=True)
+	pincode=models.IntegerField(default=0)
 	lastname=models.CharField(max_length=64,blank=True)
 	address=models.CharField(max_length=128,blank=True)
 	city=models.CharField(max_length=128,blank=True)
@@ -41,3 +43,14 @@ class Extradetails(models.Model):
 	country=models.CharField(max_length=128,blank=True)
 	DOB=models.DateField(null=True)
 	user=models.OneToOneField(User)
+class Pool(models.Model):
+	poolname=models.CharField(max_length=64)
+	recipient=models.CharField(max_length=64)
+	occassion=models.CharField(max_length=64,null=True)
+	occassion_date=models.DateField(null=True)
+	minamt=models.IntegerField()
+	maxamt=models.IntegerField()
+	giftopt01=models.CharField(max_length=100,default='To Be Decided')
+	giftopt02=models.CharField(max_length=100,default='To Be Decided')
+	giftopt03=models.CharField(max_length=100,default='To Be Decided')
+	gifters= models.ManyToManyField(User,null=True)
